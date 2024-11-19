@@ -26,7 +26,10 @@ interface TileProps {
 }
 
 const Tile: React.FC<TileProps> = ({ number }) => {
-  return <TileContainer>{number}</TileContainer>;
+  const checkTilePosition = () => {
+    console.log("checkTilePosition", number);
+  };
+  return <TileContainer onClick={checkTilePosition}>{number}</TileContainer>;
 };
 
 export default Tile;

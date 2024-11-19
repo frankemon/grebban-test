@@ -6,7 +6,11 @@ const ROWS = 3;
 const COLS = 5;
 const TILES_AMOUNT = ROWS * COLS - 1;
 //   grid-template-columns: repeat(${COLS}, 1fr);
-
+{
+  /* {Array.from({ length: TILES_AMOUNT }).map((_, index) => (
+        <Tile key={index} number={index + 1} />
+      ))} */
+}
 // const TILES_AMOUNT = 5;
 
 const BoardContainer = styled.div`
@@ -18,12 +22,16 @@ const BoardContainer = styled.div`
   background-color: #d3d3d3;
 `;
 
-const Board: React.FC = () => {
+interface BoardProps {
+  tiles: number[];
+}
+
+const Board: React.FC<BoardProps> = ({ tiles }) => {
   return (
     <BoardContainer>
-      {Array.from({ length: TILES_AMOUNT }).map((_, index) => (
-        <Tile key={index} number={index + 1} />
-      ))}
+      {tiles.map((tile, index) =>
+        tile === 0 ? null : <Tile key={index} number={tile} />
+      )}
     </BoardContainer>
   );
 };
