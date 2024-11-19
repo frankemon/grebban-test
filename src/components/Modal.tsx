@@ -1,5 +1,17 @@
 import React from "react";
 import styled from "styled-components";
+import capatalizeText from "../utils/capitalizeText";
+
+interface ModalProps {
+  text: string;
+  button: string;
+  prompt: boolean;
+  promptText: string;
+  close: boolean;
+  onClick: () => void;
+  onClose: () => void;
+  closeText: string;
+}
 
 const ModalOverlay = styled.div`
   display: flex;
@@ -55,16 +67,6 @@ const ModalButtonClose = styled.button`
   font-family: "Open Sans", sans-serif;
 `;
 
-interface ModalProps {
-  text: string;
-  button: string;
-  prompt: boolean;
-  promptText: string;
-  close: boolean;
-  onClick: () => void;
-  onClose: () => void;
-}
-
 const Modal: React.FC<ModalProps> = ({
   text,
   button,
@@ -73,16 +75,19 @@ const Modal: React.FC<ModalProps> = ({
   promptText,
   onClick,
   onClose,
+  closeText,
 }) => {
   return (
     <ModalOverlay>
       <ModalBody>
-        {text}
-        {prompt && <p>{promptText}</p>}
+        <h1>{capatalizeText(text)}</h1>
+        {prompt && <p>{capatalizeText(promptText)}</p>}
         <ModalButtonContainer>
-          <ModalButton onClick={onClick}>{button}</ModalButton>
+          <ModalButton onClick={onClick}>{capatalizeText(button)}</ModalButton>
           {close && (
-            <ModalButtonClose onClick={onClose}>Stäng</ModalButtonClose>
+            <ModalButtonClose onClick={onClose}>
+              {capatalizeText(closeText)}
+            </ModalButtonClose>
           )}
         </ModalButtonContainer>
       </ModalBody>

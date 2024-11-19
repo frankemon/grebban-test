@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import capatalizeText from "../utils/capitalizeText";
 
 interface ButtonProps {
   text: string;
@@ -16,9 +17,7 @@ const ButtonContainer = styled.div`
 
 const Button: React.FC<ButtonProps> = ({ text, onClick }) => {
   return (
-    <ButtonContainer onClick={onClick} className="btn">
-      {text.charAt(0).toUpperCase() + text.slice(1)}
-    </ButtonContainer>
+    <ButtonContainer onClick={onClick}>{capatalizeText(text)}</ButtonContainer>
   );
 };
 
