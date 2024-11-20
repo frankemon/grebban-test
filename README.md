@@ -27,8 +27,8 @@ Make sure you have the following installed on your machine:
 1. **Clone the repository:**
 
    ```sh
-   git clone https://github.com/frankemon/15-puzzle-game.git
-   cd 15-puzzle-game
+   git clone https://github.com/frankemon/grebban-test.git
+   cd grebban-test
    ```
 
 2. **Install dependencies:**
