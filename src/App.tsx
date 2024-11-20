@@ -8,12 +8,19 @@ import Modal from "./components/Modal";
 const COLS = 5;
 const SOLVED = false;
 
-// Returns new array of randomized tiles (Fisher-Yates shuffle)
-// Problematic for large data sets but fine for small data sets (Stackoverflow)
-// Not truly random in 10 000 tests, can be biased to lowest and highest values (Stackoverflow)
+// Returns new array of randomized tiles by swapping elements at random indices
+// Fisher-Yates shuffle algorithm (Stackoverflow), which is better than sort which I previously used
+// Better in the sense of true randomness and unbiased results (sort is prone to bias but probably fine for this use case (small data set))
 const randomizeTiles: (tiles: number[]) => number[] = (tiles) => {
-  // Generates random number between -0.5 and 0.5, then sorts the array based on that number
-  const randomized = tiles.sort(() => Math.random() - 0.5);
+  // Create a copy of the initial tiles array to avoid mutating original array
+  const randomized = [...tiles];
+  // Loop from last element to first element, decrementing by 1 each iteration
+  for (let i = randomized.length - 1; i > 0; i--) {
+    // Generate a random index between 0 and i (inclusive)
+    const j = Math.floor(Math.random() * (i + 1));
+    // Swap elements at indices i and j
+    [randomized[i], randomized[j]] = [randomized[j], randomized[i]];
+  }
   return randomized;
 };
 
@@ -42,6 +49,15 @@ const MainContainer = styled.div`
   justify-content: center;
   align-items: center;
   height: 100vh;
+`;
+
+const NameContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
+  font-size: 1rem;
+  color: #000000;
 `;
 
 const App: React.FC = () => {
@@ -186,6 +202,7 @@ const App: React.FC = () => {
       <MainContainer>
         <Board tiles={tiles} onTileClick={handleTileClick} cols={COLS} />
         <Button text={"slumpa"} onClick={handleRandomize} />
+        <NameContainer>Francois Hugo</NameContainer>
       </MainContainer>
     </>
   );
