@@ -6,6 +6,7 @@ interface TileProps {
   onClick: () => void;
 }
 
+// Conditional styling using isEmpty to make sure empty tile takes up space in grid
 const TileContainer = styled.div<{ $isEmpty: boolean }>`
   display: flex;
   justify-content: center;
@@ -27,8 +28,10 @@ const TileContainer = styled.div<{ $isEmpty: boolean }>`
 `;
 
 const Tile: React.FC<TileProps> = ({ number, onClick }) => {
+  // Check if isEmpty is 0, if so, isEmpty is true
   const isEmpty = number === 0;
   return (
+    // Render the tile according to the isEmpty state
     <TileContainer $isEmpty={isEmpty} onClick={isEmpty ? undefined : onClick}>
       {isEmpty ? "" : number}
     </TileContainer>
