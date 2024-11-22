@@ -27,12 +27,13 @@ const randomizeTiles: (tiles: number[]) => number[] = (tiles) => {
 // Loop from 0 to tiles.length, if a tile is not in the correct position (i + 1), return false
 // i + 1 because the tiles are 1-indexed
 const checkIfSolved = (tiles: number[]) => {
-  for (let i = 0; i < tiles.length; i++) {
+  for (let i = 0; i < tiles.length - 1; i++) {
     if (tiles[i] !== i + 1) {
       return false;
     }
   }
-  return true;
+  // Check if the last tile is 0
+  return tiles[tiles.length - 1] === 0;
 };
 
 const GlobalStyle = createGlobalStyle`
